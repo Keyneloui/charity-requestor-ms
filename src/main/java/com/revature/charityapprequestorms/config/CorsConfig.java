@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class CorsConfig implements WebMvcConfigurer {
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		String [] origins = { "http://localhost:4200", "https://charity-requestor.herokuapp.com"};
+		String [] origins = { "http://localhost:4200", "https://charityapp-admin.firebaseapp.com"};
 		registry.addMapping("/**").allowedOrigins(origins)
 				.allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "HEAD").allowCredentials(true);
 	}
