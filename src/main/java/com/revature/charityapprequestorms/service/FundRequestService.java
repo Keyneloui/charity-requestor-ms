@@ -100,7 +100,7 @@ public class FundRequestService {
 		List<RequestorTransaction> list = null;
 		list = requestorTransactionRepo.findByTransactionId(id);
 		if (list.isEmpty()) {
-			throw new ServiceException(MessageConstant.FUND_REQUEST);
+			throw new ServiceException(MessageConstant.FUND_REQUEST_ID);
 		}
 		return list;
 	}

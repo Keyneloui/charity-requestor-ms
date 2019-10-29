@@ -39,4 +39,6 @@ public class MessageConstant {
 
 	public static final String REQUESTOR_VALIDATOR = "Requestor Id Not Found";
 
+	public static final String FUND_REQUEST_ID = "Invalid Transaction Id";
+
 }
