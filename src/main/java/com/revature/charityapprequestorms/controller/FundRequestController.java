@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -123,13 +124,13 @@ public class FundRequestController {
 	 * valid, return UserDetails object
 	 */
 
-	@GetMapping("/IdTransaction")
+	@GetMapping("/{id}")
 	@ApiOperation(value = "List Requestor Id Transaction API")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = RequestorTransaction.class),
 			@ApiResponse(code = 400, message = "Fund request cannot be listed", response = Message.class) })
 
-	public ResponseEntity<?> listById(@RequestParam ("id")int id) {
-		List<RequestorTransaction> list = null;
+	public ResponseEntity<?> listById(@PathVariable ("id")int id) {
+		RequestorTransaction list = null;
 		
 
 		try {

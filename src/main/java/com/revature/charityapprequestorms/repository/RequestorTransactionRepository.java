@@ -11,7 +11,7 @@ import com.revature.charityapprequestorms.model.RequestorTransaction;
 @Repository
 public interface RequestorTransactionRepository extends JpaRepository<RequestorTransaction,Integer> {
 	@Query(" from RequestorTransaction where id = :id")
-	List<RequestorTransaction> findByTransactionId(Integer id);
+	RequestorTransaction findByTransactionId(Integer id);
 	
 
 }

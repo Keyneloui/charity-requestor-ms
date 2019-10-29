@@ -96,10 +96,10 @@ public class FundRequestService {
 		return list;
 	}
 
-	public List<RequestorTransaction> findById(int id) throws ServiceException {
-		List<RequestorTransaction> list = null;
+	public RequestorTransaction findById(int id) throws ServiceException {
+		RequestorTransaction list = null;
 		list = requestorTransactionRepo.findByTransactionId(id);
-		if (list.isEmpty()) {
+		if (list == null ) {
 			throw new ServiceException(MessageConstant.FUND_REQUEST_ID);
 		}
 		return list;
