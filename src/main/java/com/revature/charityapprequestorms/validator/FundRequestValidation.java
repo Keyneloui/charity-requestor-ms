@@ -37,7 +37,7 @@ public class FundRequestValidation {
 		
 		Boolean validateId = userService.validateId(userId);
 		if ( validateId == null || !validateId) {
-			throw new ValidatorException("Requestor Id not found");
+			throw new ValidatorException(MessageConstant.REQUESTOR_VALIDATOR);
 		}
 	}
 }

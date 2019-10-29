@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -116,5 +116,31 @@ public class FundRequestController {
 		}
 
 	}
+	/**
+	 * List All Fund request in Fund request Controller
+	 * 
+	 * If the list is returned as null, return ServiceException If the list is
+	 * valid, return UserDetails object
+	 */
 
+	@GetMapping("/IdTransaction")
+	@ApiOperation(value = "List Requestor Id Transaction API")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = RequestorTransaction.class),
+			@ApiResponse(code = 400, message = "Fund request cannot be listed", response = Message.class) })
+
+	public ResponseEntity<?> listById(@RequestParam ("id")int id) {
+		List<RequestorTransaction> list = null;
+		
+
+		try {
+			list = fundRequestService.findById(id);
+
+			return new ResponseEntity<>(list, HttpStatus.OK);
+		} catch (ServiceException e) {
+			LOGGER.error("Exception",e);
+			Message message = new Message(e.getMessage());
+			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+		}
+
+	}
 }

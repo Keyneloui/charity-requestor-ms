@@ -18,8 +18,6 @@ public class FundRequestDto {
 
 	private int requestedBy;
 	
-	private String createdBy = "keyne";
-
 	private LocalDateTime createdDate;
 
 	private LocalDateTime modifiedDate;

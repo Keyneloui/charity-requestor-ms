@@ -1,9 +1,7 @@
 package com.revature.charityapprequestorms.service;
 
-
 import java.time.LocalDateTime;
 import java.util.List;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,11 +25,9 @@ public class FundRequestService {
 
 	@Autowired
 	RequestorTransactionRepository requestorTransactionRepo;
-	
+
 	@Autowired
 	FundRequestValidation fundRequestValidation;
-	
-	
 
 	/**
 	 * Raise fund request in Fund Request service
@@ -41,7 +37,6 @@ public class FundRequestService {
 	 */
 	@Transactional
 	public void addFundRequest(final FundRequestDto fundRequestDto) throws ServiceException {
-		
 
 		try {
 			FundRequest fundRequest = new FundRequest();
@@ -50,12 +45,9 @@ public class FundRequestService {
 			fundRequest.setRequestedBy(fundRequestDto.getRequestedBy());
 			fundRequest.setFundNeeded(fundRequestDto.getFundNeeded());
 
-		
-
 			FundRequest fundResp = fundRequestRepo.findById(fundRequestDto.getCategoryId());
 			if (fundResp == null) {
 				fundRequestValidation.fundRequestValidator(fundRequest);
-				
 
 				fundRequest.setActive(true);
 				fundRequest.setCreatedDate(LocalDateTime.now());
@@ -75,12 +67,11 @@ public class FundRequestService {
 			}
 
 			else {
-				
+
 				throw new ServiceException(MessageConstant.FUND_REQUEST_ADDITION);
 
 			}
-		} 
-		catch (ValidatorException e) {
+		} catch (ValidatorException e) {
 			throw new ServiceException(e.getMessage());
 
 		}
@@ -90,8 +81,7 @@ public class FundRequestService {
 	public List<FundRequest> findAll() throws ServiceException {
 		List<FundRequest> list = null;
 		list = fundRequestRepo.findAll();
-		if(list.isEmpty())
-		{
+		if (list.isEmpty()) {
 			throw new ServiceException(MessageConstant.FUND_REQUEST);
 		}
 		return list;
@@ -100,12 +90,18 @@ public class FundRequestService {
 	public List<RequestorTransaction> findAllRequest() throws ServiceException {
 		List<RequestorTransaction> list = null;
 		list = requestorTransactionRepo.findAll();
-		if(list.isEmpty())
-		{
+		if (list.isEmpty()) {
 			throw new ServiceException(MessageConstant.FUND_REQUEST);
 		}
 		return list;
 	}
 
-	
+	public List<RequestorTransaction> findById(int id) throws ServiceException {
+		List<RequestorTransaction> list = null;
+		list = requestorTransactionRepo.findByTransactionId(id);
+		if (list.isEmpty()) {
+			throw new ServiceException(MessageConstant.FUND_REQUEST);
+		}
+		return list;
+	}
 }
