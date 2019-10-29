@@ -13,7 +13,7 @@ public class UserService {
 
 	public Boolean validateId(final Integer userId) {
 		String apiUrl = "https://userapp-v1.herokuapp.com";
-		ResponseEntity<Boolean> postForEntity = restTemplate.postForEntity(apiUrl + "/admin/login", userId,
+		ResponseEntity<Boolean> postForEntity = restTemplate.getForEntity(apiUrl + "/admin/"+  userId + "/validate",
 				Boolean.class);
 		Boolean result = postForEntity.getBody();
 

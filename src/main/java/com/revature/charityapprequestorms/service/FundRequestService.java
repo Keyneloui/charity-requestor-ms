@@ -81,10 +81,7 @@ public class FundRequestService {
 			}
 		} 
 		catch (ValidatorException e) {
-			throw new ServiceException(MessageConstant.FUND_REQUEST_VALIDATOR);
-
-		}catch (Exception e) {
-			throw new ServiceException(MessageConstant.FUND_REQUEST_ADDITION);
+			throw new ServiceException(e.getMessage());
 
 		}
 

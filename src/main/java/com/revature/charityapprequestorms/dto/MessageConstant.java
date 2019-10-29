@@ -37,4 +37,6 @@ public class MessageConstant {
 	
 	public static final String FUND_REQUEST_VALIDATOR="Give valid inputs";
 
+	public static final String REQUESTOR_VALIDATOR = "Requestor Id Not Found";
+
 }

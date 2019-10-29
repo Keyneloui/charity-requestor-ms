@@ -17,13 +17,13 @@ public class FundRequestValidation {
 		int requestorId = fundRequest.getRequestedBy();
 		double fundNeeded = fundRequest.getFundNeeded();
 		if (categoryid == 0) {
-			throw new ValidatorException(MessageConstant.FUND_REQUEST_ADDITION);
+			throw new ValidatorException(MessageConstant.FUND_REQUEST_VALIDATOR);
 		}
 		if (requestorId == 0){
-			throw new ValidatorException(MessageConstant.FUND_REQUEST_ADDITION);
+			throw new ValidatorException(MessageConstant.FUND_REQUEST_VALIDATOR);
 		}
 		if (fundNeeded == 0) {
-			throw new ValidatorException(MessageConstant.FUND_REQUEST_ADDITION);
+			throw new ValidatorException(MessageConstant.FUND_REQUEST_VALIDATOR);
 		}
 		
 		validateUser(requestorId);
@@ -37,7 +37,7 @@ public class FundRequestValidation {
 		
 		Boolean validateId = userService.validateId(userId);
 		if ( validateId == null || !validateId) {
-			throw new ValidatorException("Request Id not found");
+			throw new ValidatorException("Requestor Id not found");
 		}
 	}
 }
