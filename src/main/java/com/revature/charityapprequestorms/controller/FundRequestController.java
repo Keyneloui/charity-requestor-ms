@@ -126,11 +126,11 @@ public class FundRequestController {
 
 	@GetMapping("/{id}")
 	@ApiOperation(value = "List Requestor Id Transaction API")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = RequestorTransaction.class),
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = FundRequest.class),
 			@ApiResponse(code = 400, message = "Fund request cannot be listed", response = Message.class) })
 
 	public ResponseEntity<?> listById(@PathVariable ("id")int id) {
-		RequestorTransaction list = null;
+		FundRequest list = null;
 		
 
 		try {

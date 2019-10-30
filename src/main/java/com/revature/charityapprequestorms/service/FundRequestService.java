@@ -99,8 +99,8 @@ public class FundRequestService {
 		return list;
 	}
 
-	public RequestorTransaction findById(int id) throws ServiceException {
-		RequestorTransaction list = null;
+	public FundRequest findById(int id) throws ServiceException {
+		FundRequest list = null;
 		list = fundRequestRepo.findByTransactionId(id);
 		if (list == null ) {
 			throw new ServiceException(MessageConstant.FUND_REQUEST_ID);

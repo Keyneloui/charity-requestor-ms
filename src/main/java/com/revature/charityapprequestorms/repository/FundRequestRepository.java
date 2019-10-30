@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.revature.charityapprequestorms.model.FundRequest;
-import com.revature.charityapprequestorms.model.RequestorTransaction;
+
 
 @Repository
 public interface FundRequestRepository extends JpaRepository<FundRequest, Integer> {
@@ -14,6 +14,6 @@ public interface FundRequestRepository extends JpaRepository<FundRequest, Intege
 	public FundRequest findById(@Param("categoryId") int categoryId);
 	
 	@Query(" from FundRequest where id = :id")
-	RequestorTransaction findByTransactionId(Integer id);
+	FundRequest findByTransactionId(Integer id);
 
 }
