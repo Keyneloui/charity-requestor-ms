@@ -120,14 +120,12 @@ public class FundRequestService {
 			dto.setRequestedBy(fundRequest.getRequestedBy());
 			dto.setId(fundRequest.getId());
 			dto.setExpiryDate(fundRequest.getExpiryDate());
-			//dto.setRequestedByName("Keyne");
-			dto.setCategoryName("Food");
-			
-			//dto.getRequestedByName(fundRequest.ge)
 			
 			
 			UserDTO user = userService.getUser(fundRequest.getRequestedBy());
 			dto.setRequestedByName(user.getName());
+			FundRequestDto fundDto = userService.getFund(fundRequest.getCategoryId());
+			dto.setCategoryName(fundDto.getCategoryName());
 			listDto.add(dto);
 			
 			
