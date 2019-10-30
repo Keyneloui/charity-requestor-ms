@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.revature.charityapprequestorms.dto.UserDTO;
+
 @Service
 public class UserService {
 
@@ -16,6 +18,17 @@ public class UserService {
 		ResponseEntity<Boolean> postForEntity = restTemplate.getForEntity(apiUrl + "/admin/"+  userId + "/validate",
 				Boolean.class);
 		Boolean result = postForEntity.getBody();
+
+		System.out.println(result);
+		return result;
+
+	}
+	
+	public UserDTO getUser(final Integer userId) {
+		String apiUrl = "https://userapp-v1.herokuapp.com";
+		ResponseEntity<UserDTO> postForEntity = restTemplate.getForEntity(apiUrl + "/admin/"+  userId ,
+				UserDTO.class);
+		UserDTO result = postForEntity.getBody();
 
 		System.out.println(result);
 		return result;

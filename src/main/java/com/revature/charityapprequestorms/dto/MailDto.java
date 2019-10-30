@@ -4,7 +4,10 @@ import lombok.Data;
 
 @Data
 public class MailDto {
-	private String requestType;
-	private String description;
+	private String to;
+	
+	private String subject;
+	
+	private String text;
 
 }
