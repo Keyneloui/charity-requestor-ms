@@ -2,10 +2,13 @@
 CREATE TABLE fund_request (
     id INT PRIMARY KEY AUTO_INCREMENT,
     category_id INT NOT NULL,
+    title VARCHAR(100)NOT NULL,
+    description VARCHAR(100) NOT NULL,
     fund_needed DOUBLE NOT NULL,
     requested_by INT NOT NULL,
     created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     modified_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    expiry_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (category_id),
     active BOOLEAN NOT NULL DEFAULT 1,
     CHECK (fund_needed > 0)

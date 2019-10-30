@@ -33,6 +33,15 @@ public class FundRequest {
 
 	@Column(name = "created_date")
 	private LocalDateTime createdDate;
+	
+	@Column(name = "title")
+	private String title;
+	
+	@Column(name = "description")
+	private String description;
+	
+	@Column(name = "expiry_date")
+	private LocalDateTime expiryDate;
 
 	@Column(name = "modified_date")
 	private LocalDateTime modifiedDate;

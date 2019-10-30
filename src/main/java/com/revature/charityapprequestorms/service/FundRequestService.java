@@ -44,6 +44,8 @@ public class FundRequestService {
 			fundRequest.setCategoryId(fundRequestDto.getCategoryId());
 			fundRequest.setRequestedBy(fundRequestDto.getRequestedBy());
 			fundRequest.setFundNeeded(fundRequestDto.getFundNeeded());
+			fundRequest.setDescription(fundRequestDto.getDescription());
+			fundRequest.setTitle(fundRequestDto.getTitle());
 
 			FundRequest fundResp = fundRequestRepo.findById(fundRequestDto.getCategoryId());
 			if (fundResp == null) {
@@ -52,6 +54,7 @@ public class FundRequestService {
 				fundRequest.setActive(true);
 				fundRequest.setCreatedDate(LocalDateTime.now());
 				fundRequest.setModifiedDate(LocalDateTime.now());
+			
 
 				fundRequestRepo.save(fundRequest);
 				RequestorTransaction requestorTransaction = new RequestorTransaction();
@@ -98,7 +101,7 @@ public class FundRequestService {
 
 	public RequestorTransaction findById(int id) throws ServiceException {
 		RequestorTransaction list = null;
-		list = requestorTransactionRepo.findByTransactionId(id);
+		list = fundRequestRepo.findByTransactionId(id);
 		if (list == null ) {
 			throw new ServiceException(MessageConstant.FUND_REQUEST_ID);
 		}
