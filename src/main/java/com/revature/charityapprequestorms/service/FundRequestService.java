@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.charityapprequestorms.dto.FundRequestDto;
+import com.revature.charityapprequestorms.dto.MailDto;
 import com.revature.charityapprequestorms.dto.MessageConstant;
 import com.revature.charityapprequestorms.exception.ServiceException;
 import com.revature.charityapprequestorms.exception.ValidatorException;
@@ -28,6 +29,10 @@ public class FundRequestService {
 
 	@Autowired
 	FundRequestValidation fundRequestValidation;
+	
+	
+	@Autowired
+	MailService mailService;
 
 	/**
 	 * Raise fund request in Fund Request service
@@ -57,6 +62,12 @@ public class FundRequestService {
 			
 
 				fundRequestRepo.save(fundRequest);
+				// Mail service
+				MailDto mailDTO = new MailDto();
+				mailDTO.setRequestType(fundRequestDto.getTitle());
+				mailDTO.setDescription(fundRequestDto.getDescription());
+				mailService.sendMail(mailDTO);
+				
 				RequestorTransaction requestorTransaction = new RequestorTransaction();
 				requestorTransaction.setStatus("Verified");
 				requestorTransaction.setActive(true);
