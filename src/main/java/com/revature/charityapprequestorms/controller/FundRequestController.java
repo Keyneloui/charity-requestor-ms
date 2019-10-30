@@ -75,7 +75,7 @@ public class FundRequestController {
 
 	public ResponseEntity<?> listFundRequest() {
 
-		List<FundRequest> list = null;
+		List<FundRequestDto> list = null;
 		
 
 		try {

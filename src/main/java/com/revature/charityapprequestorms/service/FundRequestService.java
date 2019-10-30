@@ -1,6 +1,7 @@
 package com.revature.charityapprequestorms.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,13 +102,33 @@ public class FundRequestService {
 
 	}
 
-	public List<FundRequest> findAll() throws ServiceException {
-		List<FundRequest> list = null;
-		list = fundRequestRepo.findAll();
-		if (list.isEmpty()) {
+	public List<FundRequestDto> findAll() throws ServiceException {
+		List<FundRequest> list = fundRequestRepo.findAll();
+		
+		
+		List<FundRequestDto> listDto=new ArrayList<FundRequestDto>();
+		for (FundRequest fundRequest : list) {
+			FundRequestDto dto = new FundRequestDto();
+			dto.setCategoryId(fundRequest.getCategoryId());
+			dto.setDescription(fundRequest.getDescription());
+			dto.setFundNeeded(fundRequest.getFundNeeded());
+			dto.setTitle(fundRequest.getTitle());
+			dto.setCreatedDate(fundRequest.getCreatedDate());
+			dto.setModifiedDate(fundRequest.getModifiedDate());
+			dto.setActive(true);
+			dto.setRequestedBy(fundRequest.getRequestedBy());
+			dto.setId(fundRequest.getId());
+			dto.setExpiryDate(fundRequest.getExpiryDate());
+			
+			//dto.getRequestedByName(fundRequest.ge)
+			listDto.add(dto);
+			
+			
+		}
+		if (listDto.isEmpty()) {
 			throw new ServiceException(MessageConstant.FUND_REQUEST);
 		}
-		return list;
+		return listDto;
 	}
 
 	public List<RequestorTransaction> findAllRequest() throws ServiceException {

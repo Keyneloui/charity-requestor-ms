@@ -20,6 +20,10 @@ public class FundRequestDto {
 
 	private int requestedBy;
 	
+	private String requestedByName;
+	
+	private String categoryName;
+	
 	private LocalDateTime createdDate;
 
 	private LocalDateTime modifiedDate;
