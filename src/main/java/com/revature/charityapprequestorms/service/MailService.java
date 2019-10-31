@@ -11,11 +11,10 @@ import com.revature.charityapprequestorms.dto.MailDto;
 public class MailService {
 	@Autowired
 	RestTemplate restTemplate;
-	
-	void sendMail(final MailDto mailDTO)
-	{
+
+	void sendMail(final MailDto mailDTO) {
 		String apiUrl = "https://charity-notification.herokuapp.com";
-		ResponseEntity<Void> postForEntity = restTemplate.postForEntity(apiUrl+"/mail/send", mailDTO, Void.class);
+		ResponseEntity<Void> postForEntity = restTemplate.postForEntity(apiUrl + "/mail/send", mailDTO, Void.class);
 		System.out.println(postForEntity);
 	}
 

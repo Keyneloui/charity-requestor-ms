@@ -1,6 +1,5 @@
 package com.revature.charityapprequestorms.model;
 
-
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -26,7 +25,7 @@ public class RequestorTransaction {
 
 	@Column(name = "fund_needed")
 	private double fundNeeded;
-	
+
 	@Column(name = "status")
 	private String status;
 

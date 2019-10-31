@@ -16,7 +16,7 @@ public class UserService {
 
 	public Boolean validateId(final Integer userId) {
 		String apiUrl = "https://userapp-v1.herokuapp.com";
-		ResponseEntity<Boolean> postForEntity = restTemplate.getForEntity(apiUrl + "/admin/"+  userId + "/validate",
+		ResponseEntity<Boolean> postForEntity = restTemplate.getForEntity(apiUrl + "/admin/" + userId + "/validate",
 				Boolean.class);
 		Boolean result = postForEntity.getBody();
 
@@ -24,20 +24,20 @@ public class UserService {
 		return result;
 
 	}
-	
+
 	public UserDTO getUser(final Integer userId) {
 		String apiUrl = "https://userapp-v1.herokuapp.com";
-		ResponseEntity<UserDTO> postForEntity = restTemplate.getForEntity(apiUrl + "/admin/"+  userId ,
-				UserDTO.class);
+		ResponseEntity<UserDTO> postForEntity = restTemplate.getForEntity(apiUrl + "/admin/" + userId, UserDTO.class);
 		UserDTO result = postForEntity.getBody();
 
 		System.out.println(result);
 		return result;
 
 	}
+
 	public FundRequestDto getFund(final Integer Id) {
 		String apiUrl = "https://charity-category.herokuapp.com";
-		ResponseEntity<FundRequestDto> postForEntity = restTemplate.getForEntity(apiUrl + "/categories/"+ Id ,
+		ResponseEntity<FundRequestDto> postForEntity = restTemplate.getForEntity(apiUrl + "/categories/" + Id,
 				FundRequestDto.class);
 		FundRequestDto result = postForEntity.getBody();
 

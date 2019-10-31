@@ -130,7 +130,7 @@ public class FundRequestController {
 			@ApiResponse(code = 400, message = "Fund request cannot be listed", response = Message.class) })
 
 	public ResponseEntity<?> listById(@PathVariable ("id")int id) {
-		FundRequest list = null;
+		List<FundRequestDto> list = null;
 		
 
 		try {
