@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.revature.charityapprequestorms.dto.CategoryDTO;
 import com.revature.charityapprequestorms.dto.FundRequestDto;
 import com.revature.charityapprequestorms.dto.MailDto;
 import com.revature.charityapprequestorms.dto.MessageConstant;
@@ -36,6 +37,8 @@ public class FundRequestService {
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	CategoryService categoryService;
 	
 	
 	@Autowired
@@ -123,9 +126,13 @@ public class FundRequestService {
 			
 			
 			UserDTO user = userService.getUser(fundRequest.getRequestedBy());
+			if (user != null) {
 			dto.setRequestedByName(user.getName());
-			FundRequestDto fundDto = userService.getFund(fundRequest.getCategoryId());
-			dto.setCategoryName(fundDto.getCategoryName());
+			}
+			CategoryDTO categoryDTO = categoryService.getFund(fundRequest.getCategoryId());
+			if(categoryDTO!=null) {
+			dto.setCategoryName(categoryDTO.getCategoryName());
+			}
 			listDto.add(dto);
 			
 			
@@ -145,12 +152,13 @@ public class FundRequestService {
 		return list;
 	}
 
-	public List<FundRequestDto> findById(int id) throws ServiceException {
-		List<FundRequest> list = fundRequestRepo.findByTransactionId(id);
+	public FundRequestDto findById(int id) throws ServiceException {
 		
-		List<FundRequestDto> listDto=new ArrayList<FundRequestDto>();
-		for (FundRequest fundRequest : list) {
-			FundRequestDto dto = new FundRequestDto();
+			FundRequest fundRequest= fundRequestRepo.findByTransactionId(id);
+			FundRequestDto dto=null;
+			if (fundRequest != null )
+			{
+			dto=new FundRequestDto();
 			dto.setCategoryId(fundRequest.getCategoryId());
 			dto.setDescription(fundRequest.getDescription());
 			dto.setFundNeeded(fundRequest.getFundNeeded());
@@ -164,16 +172,18 @@ public class FundRequestService {
 			
 			
 			UserDTO user = userService.getUser(fundRequest.getRequestedBy());
+			if (user != null) {
 			dto.setRequestedByName(user.getName());
-			FundRequestDto fundDto = userService.getFund(fundRequest.getCategoryId());
-			dto.setCategoryName(fundDto.getCategoryName());
-			listDto.add(dto);
-			
-			
+			}
+			CategoryDTO categoryDTO = categoryService.getFund(fundRequest.getCategoryId());
+			if(categoryDTO!=null) {
+			dto.setCategoryName(categoryDTO.getCategoryName());
+			}
+			else {
+			throw new ServiceException(MessageConstant.FUND_REQUEST_ID);
 		}
-		if (listDto.isEmpty()) {
-			throw new ServiceException(MessageConstant.FUND_REQUEST);
-		}
-		return listDto;
+		
 	}
+			return dto;
+}
 }

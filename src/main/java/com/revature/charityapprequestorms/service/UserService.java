@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.revature.charityapprequestorms.dto.FundRequestDto;
+
 import com.revature.charityapprequestorms.dto.UserDTO;
 
 @Service
@@ -35,14 +35,5 @@ public class UserService {
 
 	}
 
-	public FundRequestDto getFund(final Integer Id) {
-		String apiUrl = "https://charity-category.herokuapp.com";
-		ResponseEntity<FundRequestDto> postForEntity = restTemplate.getForEntity(apiUrl + "/categories/" + Id,
-				FundRequestDto.class);
-		FundRequestDto result = postForEntity.getBody();
-
-		System.out.println(result);
-		return result;
-
-	}
+	
 }
