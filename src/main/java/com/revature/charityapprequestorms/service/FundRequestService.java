@@ -128,6 +128,7 @@ public class FundRequestService {
 			UserDTO user = userService.getUser(fundRequest.getRequestedBy());
 			if (user != null) {
 			dto.setRequestedByName(user.getName());
+			dto.setRequestedByEmail(user.getEmail());
 			}
 			CategoryDTO categoryDTO = categoryService.getFund(fundRequest.getCategoryId());
 			if(categoryDTO!=null) {
@@ -174,6 +175,7 @@ public class FundRequestService {
 			UserDTO user = userService.getUser(fundRequest.getRequestedBy());
 			if (user != null) {
 			dto.setRequestedByName(user.getName());
+			dto.setRequestedByEmail(user.getEmail());
 			}
 			CategoryDTO categoryDTO = categoryService.getFund(fundRequest.getCategoryId());
 			if(categoryDTO!=null) {

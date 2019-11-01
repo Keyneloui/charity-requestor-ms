@@ -27,6 +27,7 @@ public class UserService {
 
 	public UserDTO getUser(final Integer userId) {
 		String apiUrl = "https://userapp-v1.herokuapp.com";
+		System.out.println("id"+userId);
 		ResponseEntity<UserDTO> postForEntity = restTemplate.getForEntity(apiUrl + "/admin/" + userId, UserDTO.class);
 		UserDTO result = postForEntity.getBody();
 
