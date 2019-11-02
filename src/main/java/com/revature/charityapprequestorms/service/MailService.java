@@ -14,7 +14,7 @@ public class MailService {
 
 	void sendMail(final MailDto mailDTO) {
 		String apiUrl = "https://charity-notification.herokuapp.com";
-		ResponseEntity<Void> postForEntity = restTemplate.postForEntity(apiUrl + "/mail/send", mailDTO, Void.class);
+		ResponseEntity<Void> postForEntity = restTemplate.postForEntity(apiUrl + "/mail/fundReqMail", mailDTO, Void.class);
 		System.out.println(postForEntity);
 	}
 
