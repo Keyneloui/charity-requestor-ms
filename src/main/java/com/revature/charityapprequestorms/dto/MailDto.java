@@ -4,10 +4,16 @@ import lombok.Data;
 
 @Data
 public class MailDto {
-	private String to;
+	private String description;
 
-	private String subject;
+	private String categoryName;
 
-	private String text;
+	private String title;
+	
+	private double amount;
+	
+	private String name;
+	
+	private String emailId;
 
 }

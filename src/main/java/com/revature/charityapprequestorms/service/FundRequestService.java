@@ -76,9 +76,19 @@ public class FundRequestService {
 				MailDto mailDTO = new MailDto();
 				UserDTO user = userService.getUser(fundRequestDto.getRequestedBy());
 				System.out.println(user);
-				mailDTO.setTo(user.getEmail());
-				mailDTO.setSubject(fundRequestDto.getTitle());
-				mailDTO.setText(fundRequestDto.getDescription());
+				if (user != null) {
+					mailDTO.setName(user.getName());
+					mailDTO.setEmailId(user.getEmail());
+				}
+				mailDTO.setTitle(fundRequestDto.getTitle());
+				mailDTO.setDescription(fundRequestDto.getDescription());
+				mailDTO.setAmount(fundRequestDto.getFundNeeded());
+				
+				CategoryDTO categoryDTO = categoryService.getFund(fundRequest.getCategoryId());
+				if(categoryDTO!=null) {
+					fundRequestDto.setCategoryName(categoryDTO.getCategoryName());
+				}
+				mailDTO.setCategoryName(fundRequestDto.getCategoryName());
 				mailService.sendMail(mailDTO);
 				
 				RequestorTransaction requestorTransaction = new RequestorTransaction();
@@ -104,6 +114,12 @@ public class FundRequestService {
 		}
 
 	}
+	/**
+	 * List fund request in Fund Request service
+	 * 
+	 * data is iterated in fund request object, If the object is returned as null,
+	 * return ServiceException If the object is valid, return Fund request array
+	 */
 
 	public List<FundRequestDto> findAll() throws ServiceException {
 		List<FundRequest> list = fundRequestRepo.findAll();
