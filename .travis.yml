@@ -1,0 +1,31 @@
+language: java
+
+addons:
+  sonarcloud:
+    organization: "keyneloui"
+    token:
+      secure: 9f9bce244e86fc71b5e69232acc5352295fa959e
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'   
+    
+#jobs:
+#  include:
+    #- stage: pre-build
+     # script: mvn clean
+  
+    #- stage: test
+    #  script: mvn test org.jacoco:jacoco-maven-plugin:prepare-agent
+    
+    #- stage: build
+     # script: mvn install
+      
+    #- stage: quality
+     # script: mvn sonar:sonar
+
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=krishnawisely_charity-user-ms
+notifications:
+  slack: javafullstackgroup:cU6yGmSyVRshhITnnXELpBug
