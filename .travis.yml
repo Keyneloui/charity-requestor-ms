@@ -4,7 +4,7 @@ addons:
   sonarcloud:
     organization: "keyneloui"
     token:
-      secure: 9f9bce244e86fc71b5e69232acc5352295fa959e
+      secure: bf02627e569037c8cb21e44d13c4a627af977489
 cache:
   directories:
     - '$HOME/.m2/repository'
@@ -26,6 +26,6 @@ cache:
 
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=krishnawisely_charity-user-ms
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=Keyneloui_charity-requestor-ms
 notifications:
   slack: javafullstackgroup:cU6yGmSyVRshhITnnXELpBug
