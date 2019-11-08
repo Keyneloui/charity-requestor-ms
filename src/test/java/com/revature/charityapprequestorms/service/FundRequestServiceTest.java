@@ -30,7 +30,7 @@ class FundRequestServiceTest {
 	@Autowired
 	MailService mailService;
 
-//	@Test
+//	//@Test
 	void addFundRequestTest() throws ServiceException {
 		FundRequestDto fundRequestDTO = new FundRequestDto();
 
@@ -55,7 +55,7 @@ class FundRequestServiceTest {
 		requestorTransaction.setRequestedBy(1);
 	}
 
-	@Test
+	//@Test
 	void findAllTest() throws ServiceException {
 
 		List<FundRequestDto> fundRequestObj = null;
@@ -63,7 +63,7 @@ class FundRequestServiceTest {
 		assertNotNull(fundRequestObj);
 
 	}
-	@Test
+	//@Test
 	void findAllRequestTest() throws ServiceException {
 
 		List<RequestorTransactionDto> fundRequestObj = null;
@@ -71,7 +71,7 @@ class FundRequestServiceTest {
 		assertNotNull(fundRequestObj);
 
 	}
-	//@Test
+	////@Test
 	void findByIdTest() throws ServiceException{
 		
 		FundRequestDto fundRequestObj=null;

@@ -20,7 +20,7 @@ class MailServiceTest {
 	@Autowired
 	UserService userService;
 
-	@Test
+	//@Test
 	void sendMailTest() {
 
 		MailDto mailDTO = new MailDto();

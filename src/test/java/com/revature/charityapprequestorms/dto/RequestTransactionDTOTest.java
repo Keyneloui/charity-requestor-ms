@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 class RequestTransactionDTOTest {
 
-	@Test
+	//@Test
 	void dtoTest() {
 		RequestorTransactionDto requestorTransaction=new RequestorTransactionDto();
 		requestorTransaction.setActive(true);

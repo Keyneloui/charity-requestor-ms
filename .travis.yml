@@ -4,7 +4,7 @@ addons:
   sonarcloud:
     organization: "keyneloui"
     token:
-      secure: bf02627e569037c8cb21e44d13c4a627af977489
+      secure: "bf02627e569037c8cb21e44d13c4a627af977489"
 cache:
   directories:
     - '$HOME/.m2/repository'

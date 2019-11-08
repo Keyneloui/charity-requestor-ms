@@ -14,7 +14,7 @@ class FundRequestRepositoryTest {
 	@Autowired
 	FundRequestRepository fundRequestRepository;
 
-	@Test
+	//@Test
 	void findByIdTest() {
 		int categoryId=1;
 		FundRequest fundRequest=null;
@@ -22,7 +22,7 @@ class FundRequestRepositoryTest {
 		assertNotNull(fundRequest);
 		
 	}
-	//@Test
+	////@Test
 	void findByTransactionId()
 	{
 		int id=3;

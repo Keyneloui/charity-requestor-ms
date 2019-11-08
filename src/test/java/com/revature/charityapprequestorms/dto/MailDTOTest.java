@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class MailDTOTest {
 
-	@Test
+	//@Test
 	void dtoTest() {
 		MailDto mailDto=new MailDto();
 		mailDto.setAmount(1000.0);

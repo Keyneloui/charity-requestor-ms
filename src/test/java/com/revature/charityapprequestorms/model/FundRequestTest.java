@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class FundRequestTest {
 
-	@Test
+	//@Test
 	public void fundRequest() {
 		FundRequest fundRequest = new FundRequest();
 		fundRequest.setActive(true);
