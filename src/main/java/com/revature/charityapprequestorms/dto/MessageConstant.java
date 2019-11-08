@@ -2,6 +2,10 @@ package com.revature.charityapprequestorms.dto;
 
 public class MessageConstant {
 
+	private MessageConstant() {
+		super();
+	}
+
 	// ConnectionUtil Messages
 	public static final String DRIVER_CLASS = "Unable to load the driver class";
 

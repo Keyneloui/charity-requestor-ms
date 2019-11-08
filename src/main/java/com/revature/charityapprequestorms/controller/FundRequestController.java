@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.charityapprequestorms.dto.FundRequestDto;
 import com.revature.charityapprequestorms.dto.Message;
+import com.revature.charityapprequestorms.dto.RequestorTransactionDto;
 import com.revature.charityapprequestorms.exception.ServiceException;
 import com.revature.charityapprequestorms.model.FundRequest;
 import com.revature.charityapprequestorms.model.RequestorTransaction;
@@ -30,6 +31,8 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 @RequestMapping("fundrequest")
 public class FundRequestController {
+	private static final String EXCEPTION = "Exception";
+
 	@Autowired
 	FundRequestService fundRequestService;
 	
@@ -83,7 +86,7 @@ public class FundRequestController {
 
 			return new ResponseEntity<>(list, HttpStatus.OK);
 		} catch (ServiceException e) {
-			LOGGER.error("Exception",e);
+			LOGGER.error(EXCEPTION,e);
 			Message message = new Message(e.getMessage());
 			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
 		}
@@ -103,7 +106,7 @@ public class FundRequestController {
 
 	public ResponseEntity<?> listAllRequest() {
 
-		List<RequestorTransaction> list = null;
+		List<RequestorTransactionDto> list = null;
 		
 
 		try {
@@ -111,16 +114,16 @@ public class FundRequestController {
 
 			return new ResponseEntity<>(list, HttpStatus.OK);
 		} catch (ServiceException e) {
-			LOGGER.error("Exception",e);
+			LOGGER.error(EXCEPTION,e);
 			Message message = new Message(e.getMessage());
 			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
 		}
 
 	}
 	/**
-	 * List All Fund request in Fund request Controller
+	 * Views the transaction for the particular id  Fund request Controller
 	 * 
-	 * If the list is returned as null, return ServiceException If the list is
+	 * If the object is returned as null, return ServiceException. If the object is
 	 * valid, return UserDetails object
 	 */
 
@@ -138,7 +141,7 @@ public class FundRequestController {
 
 			return new ResponseEntity<>(list, HttpStatus.OK);
 		} catch (ServiceException e) {
-			LOGGER.error("Exception",e);
+			LOGGER.error(EXCEPTION,e);
 			Message message = new Message(e.getMessage());
 			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
 		}

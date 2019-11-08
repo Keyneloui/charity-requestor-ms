@@ -12,6 +12,7 @@ import com.revature.charityapprequestorms.dto.CategoryDTO;
 import com.revature.charityapprequestorms.dto.FundRequestDto;
 import com.revature.charityapprequestorms.dto.MailDto;
 import com.revature.charityapprequestorms.dto.MessageConstant;
+import com.revature.charityapprequestorms.dto.RequestorTransactionDto;
 import com.revature.charityapprequestorms.dto.UserDTO;
 import com.revature.charityapprequestorms.exception.ServiceException;
 import com.revature.charityapprequestorms.exception.ValidatorException;
@@ -32,15 +33,13 @@ public class FundRequestService {
 
 	@Autowired
 	FundRequestValidation fundRequestValidation;
-	
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	CategoryService categoryService;
-	
-	
+
 	@Autowired
 	MailService mailService;
 
@@ -69,13 +68,11 @@ public class FundRequestService {
 				fundRequest.setActive(true);
 				fundRequest.setCreatedDate(LocalDateTime.now());
 				fundRequest.setModifiedDate(LocalDateTime.now());
-			
 
 				fundRequestRepo.save(fundRequest);
 				// Mail service
 				MailDto mailDTO = new MailDto();
 				UserDTO user = userService.getUser(fundRequestDto.getRequestedBy());
-				System.out.println(user);
 				if (user != null) {
 					mailDTO.setName(user.getName());
 					mailDTO.setEmailId(user.getEmail());
@@ -83,14 +80,14 @@ public class FundRequestService {
 				mailDTO.setTitle(fundRequestDto.getTitle());
 				mailDTO.setDescription(fundRequestDto.getDescription());
 				mailDTO.setAmount(fundRequestDto.getFundNeeded());
-				
+				// Category service
 				CategoryDTO categoryDTO = categoryService.getFund(fundRequest.getCategoryId());
-				if(categoryDTO!=null) {
+				if (categoryDTO != null) {
 					fundRequestDto.setCategoryName(categoryDTO.getCategoryName());
 				}
 				mailDTO.setCategoryName(fundRequestDto.getCategoryName());
 				mailService.sendMail(mailDTO);
-				
+
 				RequestorTransaction requestorTransaction = new RequestorTransaction();
 				requestorTransaction.setStatus("Verified");
 				requestorTransaction.setActive(true);
@@ -114,6 +111,7 @@ public class FundRequestService {
 		}
 
 	}
+
 	/**
 	 * List fund request in Fund Request service
 	 * 
@@ -123,10 +121,8 @@ public class FundRequestService {
 
 	public List<FundRequestDto> findAll() throws ServiceException {
 		List<FundRequest> list = fundRequestRepo.findAll();
-		
-		
-		
-		List<FundRequestDto> listDto=new ArrayList<FundRequestDto>();
+
+		List<FundRequestDto> listDto = new ArrayList<>();
 		for (FundRequest fundRequest : list) {
 			FundRequestDto dto = new FundRequestDto();
 			dto.setCategoryId(fundRequest.getCategoryId());
@@ -139,20 +135,20 @@ public class FundRequestService {
 			dto.setRequestedBy(fundRequest.getRequestedBy());
 			dto.setId(fundRequest.getId());
 			dto.setExpiryDate(fundRequest.getExpiryDate());
-			
-			
+
+			// User service
 			UserDTO user = userService.getUser(fundRequest.getRequestedBy());
 			if (user != null) {
-			dto.setRequestedByName(user.getName());
-			dto.setRequestedByEmail(user.getEmail());
+				dto.setRequestedByName(user.getName());
+				dto.setRequestedByEmail(user.getEmail());
 			}
+			// category Service
 			CategoryDTO categoryDTO = categoryService.getFund(fundRequest.getCategoryId());
-			if(categoryDTO!=null) {
-			dto.setCategoryName(categoryDTO.getCategoryName());
+			if (categoryDTO != null) {
+				dto.setCategoryName(categoryDTO.getCategoryName());
 			}
 			listDto.add(dto);
-			
-			
+
 		}
 		if (listDto.isEmpty()) {
 			throw new ServiceException(MessageConstant.FUND_REQUEST);
@@ -160,22 +156,48 @@ public class FundRequestService {
 		return listDto;
 	}
 
-	public List<RequestorTransaction> findAllRequest() throws ServiceException {
-		List<RequestorTransaction> list = null;
-		list = requestorTransactionRepo.findAll();
-		if (list.isEmpty()) {
-			throw new ServiceException(MessageConstant.FUND_REQUEST);
+	/**
+	 * List fund request transaction in Fund Request service
+	 * 
+	 * data is iterated from fund request object, If the object is returned as null,
+	 * return ServiceException If the object is valid, return Fund request object
+	 */
+
+	public List<RequestorTransactionDto> findAllRequest() throws ServiceException {
+		List<RequestorTransaction> list = requestorTransactionRepo.findAll();
+		List<RequestorTransactionDto> listDto = new ArrayList<>();
+		for (RequestorTransaction requestorTransaction : list) {
+			RequestorTransactionDto dto = new RequestorTransactionDto();
+			dto.setCategoryId(requestorTransaction.getCategoryId());
+			dto.setFundNeeded(requestorTransaction.getFundNeeded());
+			dto.setCreatedDate(requestorTransaction.getCreatedDate());
+			dto.setModifiedDate(requestorTransaction.getModifiedDate());
+			dto.setActive(true);
+			dto.setRequestedBy(requestorTransaction.getRequestedBy());
+			dto.setId(requestorTransaction.getId());
+			listDto.add(dto);
+
+			if (listDto.isEmpty()) {
+				throw new ServiceException(MessageConstant.FUND_REQUEST);
+			}
+
 		}
-		return list;
+		return listDto;
 	}
 
+	/**
+	 * Viewing fund request transaction in Fund Request service
+	 * 
+	 * id is returned in fund request object, If the object is returned as null,
+	 * return ServiceException If the object is valid, return Fund request object
+	 */
+
 	public FundRequestDto findById(int id) throws ServiceException {
-		
-			FundRequest fundRequest= fundRequestRepo.findByTransactionId(id);
-			FundRequestDto dto=null;
-			if (fundRequest != null )
-			{
-			dto=new FundRequestDto();
+
+		FundRequest fundRequest = fundRequestRepo.findByTransactionId(id);
+		FundRequestDto dto = null;
+		if (fundRequest != null) {
+			dto = new FundRequestDto();
 			dto.setCategoryId(fundRequest.getCategoryId());
 			dto.setDescription(fundRequest.getDescription());
 			dto.setFundNeeded(fundRequest.getFundNeeded());
@@ -186,22 +208,21 @@ public class FundRequestService {
 			dto.setRequestedBy(fundRequest.getRequestedBy());
 			dto.setId(fundRequest.getId());
 			dto.setExpiryDate(fundRequest.getExpiryDate());
-			
-			
+			// user service
 			UserDTO user = userService.getUser(fundRequest.getRequestedBy());
 			if (user != null) {
-			dto.setRequestedByName(user.getName());
-			dto.setRequestedByEmail(user.getEmail());
+				dto.setRequestedByName(user.getName());
+				dto.setRequestedByEmail(user.getEmail());
 			}
+			// category service
 			CategoryDTO categoryDTO = categoryService.getFund(fundRequest.getCategoryId());
-			if(categoryDTO!=null) {
-			dto.setCategoryName(categoryDTO.getCategoryName());
+			if (categoryDTO != null) {
+				dto.setCategoryName(categoryDTO.getCategoryName());
+			} else {
+				throw new ServiceException(MessageConstant.FUND_REQUEST_ID);
 			}
-			else {
-			throw new ServiceException(MessageConstant.FUND_REQUEST_ID);
+
 		}
-		
+		return dto;
 	}
-			return dto;
-}
 }

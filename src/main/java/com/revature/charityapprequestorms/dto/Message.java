@@ -1,14 +1,14 @@
 package com.revature.charityapprequestorms.dto;
 
 public class Message {
-	private String message;
+	private String messageInfo;
 
 	public String getMessage() {
-		return message;
+		return messageInfo;
 	}
 
 	public void setMessage(String message) {
-		this.message = message;
+		this.messageInfo = message;
 	}
 
 	public Message(String message) {
